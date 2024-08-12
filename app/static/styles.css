@@ -1,0 +1,246 @@
+/* Estilo global */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    text-align: center;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 0;
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #f4f4f4;
+    padding: 10px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+.sidebar button:hover {
+    background-color: #45a049;
+}
+
+.content {
+    flex: 1;
+    padding: 10px;
+}
+
+.split {
+    display: flex;
+    height: calc(100vh - 60px); /* Ajusta la altura según el encabezado */
+}
+
+.tickets, .tareas {
+    flex: 1;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.tickets {
+    border-right: 2px solid #ddd;
+}
+
+.h2-top {
+    border-bottom: 2px solid #858585;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+/* Tarjeta de descripcion ticket  */
+/* Estilo general para la sección de descripción */
+/* Estilo general para la sección de descripción */
+.descripcion {
+    background-color: #ffffff;  /* Fondo blanco para un look limpio */
+    border: 1px solid #d1e7dd;  /* Borde verde claro */
+    border-radius: 8px;         /* Bordes redondeados */
+    padding-top:1px;          /* Espaciado interno */
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: 20px;        /* Espaciado entre tickets */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Estilo para el título del ticket */
+.top-description {
+    display: flex;
+    justify-content: space-between; /* Alinea los elementos al principio y al final del contenedor */
+    align-items: center;           /* Alinea verticalmente los elementos en el centro del contenedor */
+
+}
+
+.top-description h2 {
+    font-size: 1.6em;           /* Tamaño de fuente mayor para el título */
+    color: #004d40;             /* Verde oscuro para destacar el título */
+    margin-bottom: 15px;        /* Espaciado debajo del título */
+}
+
+.top-description form {
+    margin: 0px;
+}
+
+/* Estilo para la descripción del ticket */
+.m-description a {
+    font-size: 1.1em;           /* Tamaño de fuente para la descripción */
+    color: #333333;             /* Negro oscuro para la descripción */
+    display: block;             /* Descripción ocupa todo el ancho disponible */
+    margin-bottom: 20px;        /* Espaciado debajo de la descripción */
+}
+
+/* Alinear los detalles en una línea */
+.l-description {
+    display: flex;              /* Usar Flexbox para alinear los elementos */
+    flex-wrap: wrap;            /* Permite que los elementos se envuelvan si es necesario */
+    gap: 15px;                  /* Espacio entre los elementos */
+}
+
+/* Ajustes para los párrafos dentro de l-description */
+.l-description p {
+    margin: 0;                  /* Quitar márgenes para que no afecten el alineamiento */
+    flex: 1;                    /* Cada párrafo toma el mismo ancho */
+    color: #004d40;             /* Verde oscuro para el texto */
+    font-size: 1em;             /* Tamaño de fuente estándar */
+    white-space: nowrap;        /* Evitar que el texto se divida en varias líneas */
+}
+
+/* Estilo para resaltar el Estado */
+.l-description p:last-child {
+    font-weight: bold;          /* Negrita para destacar el estado */
+    color: #1b5e20;             /* Verde más oscuro */
+}
+
+
+/* Fin tarjeta descripcion ticket */
+
+
+/* Estilos del modal */
+
+#ticketForm {
+    margin: 5px 5px;
+}
+
+.modal {
+    display: none; /* Oculta el modal por defecto */
+    position: fixed; /* Permanece en la misma posición al hacer scroll */
+    z-index: 1; /* Asegura que esté encima de otros contenidos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ocupa todo el ancho de la ventana */
+    height: 100%; /* Ocupa toda la altura de la ventana */
+    overflow: auto; /* Permite el desplazamiento si el contenido es demasiado grande */
+    background-color: rgb(0,0,0); /* Color de fondo oscuro */
+    background-color: rgba(0,0,0,0.4); /* Fondo con opacidad */
+}
+
+/* Contenido del modal */
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; /* Centra el modal vertical y horizontalmente */
+    border: 3px solid #888;
+    width: 80%; /* Ancho del modal */
+    max-width: 500px; /* Ancho máximo del modal */
+}
+
+/* Botón de cerrar */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    padding-top: 0px;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.titulomodal {
+    text-align: center;
+}
+
+.modalhead {
+    padding: 1px 0px !important;
+}
+/* Labels e inputs modales */
+
+form label {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+input {
+    width: 100%; /* Hacer que el campo de entrada ocupe el ancho total del formulario */
+    padding: 12px 15px; /* Espacio interno más grande para un mejor aspecto */
+    border: 1px solid #ddd; /* Borde suave */
+    border-radius: 8px; /* Esquinas redondeadas */
+    box-sizing: border-box; /* Incluir el relleno y el borde en el ancho total */
+    font-size: 16px; /* Tamaño de fuente más grande */
+    transition: all 0.3s ease; /* Transición suave para interacciones */
+}
+
+textarea {
+    width: 100%; /* Hacer que el campo de entrada ocupe el ancho total del formulario */
+    padding: 12px 15px; /* Espacio interno más grande para un mejor aspecto */
+    border: 1px solid #ddd; /* Borde suave */
+    border-radius: 8px; /* Esquinas redondeadas */
+    box-sizing: border-box; /* Incluir el relleno y el borde en el ancho total */
+    font-size: 16px; /* Tamaño de fuente más grande */
+    transition: all 0.3s ease; /* Transición suave para interacciones */
+}
+
+button[type="submit"] {
+    padding: 12px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    border-radius: 8px; /* Esquinas redondeadas */
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+select {
+    padding: 10px 10px;
+    border-radius: 8px;
+}
+
+/* Mensajes flash*/
+
+.flash-msg {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8d7da;
+    color: #721c24;
+    z-index: 1000;
+    font-size: 18px;
+    text-align: center;
+  }
+

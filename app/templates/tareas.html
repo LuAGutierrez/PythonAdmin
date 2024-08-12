@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración de Tareas</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+<body>
+    <header>
+        <h1>Administración de Tareas</h1>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <button id="tickets">Tickets</button>
+            <button id="crear">Crear Tarea</button>
+        </aside>
+        <main class="content">
+            <div class="split">
+                <div class="tickets">
+                    <h2 class="h2-top">Tareas</h2>
+                    {% for tarea in tareas %}
+                    <section class="descripcion">
+                        <header></header>
+                        <h1>{{ tarea.titulo }}</h>
+                        </header>
+                    <section>
+                        <a href="http://"> >>Descripción: {{ tarea.descripcion }}</a> 
+                    </section>
+                    <footer>
+                        <p>Responsable: {{ tarea.responsable }}</p><p>Afectado: {{ tarea.afectado }} </p><p>Estado: {{ tarea.estado }}</p>
+                    </footer>
+                    </section>
+                    
+                    {% endfor %}
+
+                </div>
+<!--               <div class="tareas"> -->
+ <!--               <h2>Tareas</h2> -->
+ <!--              Aquí puedes usar un bucle para mostrar las tareas desde la base de datos -->
+ <!--                </div> -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal para crear tickets -->
+    <div id="modales" class="modal">
+        <div class="modal-content">
+            <header class="modalhead">
+            <span class="cerrar">&times;</span>
+            <h2 class = "titulomodal">Crear tarea</h2>
+            </header>
+            <form id="tareaForm" method="post" action="/tareas">
+                <label for="tareaTitulo">Titulo:</label>
+                <input type="text" id="tareaTitulo" name="titulo" required>
+                <label for="tareaDescripcion">Descripcion:</label>
+                <input type="text" id="tareaDescripcion" name="descripcion" required>
+                <label for="tareaUsuario">Responsable:</label>
+                <input type="text" id="tareaUsuario" name="responsable" required>
+                <label for="tareaAfectado">Afectado:</label>
+                <input type="text" id="tareaAfectado" name="afectado" required>   
+                </select>
+                <input type="submit" value="Crear tarea">
+            </form>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>

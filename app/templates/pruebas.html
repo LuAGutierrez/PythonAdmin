@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Ticket</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f8f9fa;
+        }
+        .ticket-container {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .ticket-header {
+            flex: 1;
+            text-align: center;
+            margin-right: 20px;
+        }
+        .ticket-header h1 {
+            margin: 0;
+            font-size: 1.75em;
+            color: #007bff;
+        }
+        .ticket-details {
+            flex: 3;
+        }
+        .ticket-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .ticket-row .label {
+            font-weight: bold;
+            color: #333;
+        }
+        .ticket-row .value {
+            color: #555;
+        }
+        .status {
+            font-weight: bold;
+            color: #28a745; /* Cambia el color según el estado (ej., rojo para "pendiente") */
+        }
+    </style>
+</head>
+<body>
+    <div class="ticket-container">
+        <div class="ticket-header">
+            <h1>Detalles del Ticket</h1>
+        </div>
+        <div class="ticket-details">
+            <div class="ticket-row">
+                <div class="label">ID del Ticket:</div>
+                <div class="value">123456</div>
+            </div>
+            <div class="ticket-row">
+                <div class="label">Fecha de Creación:</div>
+                <div class="value">10 de agosto de 2024</div>
+            </div>
+            <div class="ticket-row">
+                <div class="label">Cliente:</div>
+                <div class="value">Juan Pérez</div>
+            </div>
+            <div class="ticket-row">
+                <div class="label">Email del Cliente:</div>
+                <div class="value">juan.perez@example.com</div>
+            </div>
+            <div class="ticket-row">
+                <div class="label">Asunto:</div>
+                <div class="value">Problema con la entrega</div>
+            </div>
+            <div class="ticket-row">
+                <div class="label">Descripción:</div>
+                <div class="value">No he recibido mi pedido aún, a pesar de que la fecha de entrega era ayer.</div>
+            </div>
+            <div class="ticket-row">
+                <div class="label">Estado:</div>
+                <div class="value status">Pendiente</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

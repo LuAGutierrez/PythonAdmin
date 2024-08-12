@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tickets</title>
+        <!-- Incluir jQuery 3.7 desde CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Administración de Tickets</h1>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul>
+          {% for message in messages %}
+            <li class="flash-msg" id="flash-msg">{{ message }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <button id="crear">Crear Ticket</button>
+            <button id="tareas">Tareas</button>
+        </aside>
+        <main class="content">
+            <div class="split">
+                <div class="tickets">
+                      <!-- Menú desplegable para filtrar tickets -->
+  <label for="filtro">Estado:</label>
+  <select id="filtro">
+    <option value="">Todos</option>
+    <option value="Resuelto" {{ 'selected' if request.args.get('estado') == 'Resuelto' }}>Resuelto</option>
+    <option value="Pendiente" {{ 'selected' if request.args.get('estado') == 'Pendiente' }}>Pendiente</option>
+  </select>
+                    <h2 class="h2-top">Tickets</h2>
+                    {% for ticket in tickets %}
+                    <section class="descripcion">
+          
+                        <div class="top-description">
+                            <h2>{{ ticket.titulo }}</h2>
+                            <form method="post" action="{{ url_for('cambiar_estado', id_ticket=ticket.id_ticket) }}">
+                                <button type="submit">Resuelto</button>
+                            </form>
+                        </div>
+                        <div class="m-description">
+                            <a>{{ ticket.descripcion }}</a>
+                        </div>
+                        <div class="l-description">
+                            <p>Empresa: {{ ticket.empresa }}</p>
+                            <p>Usuario: {{ ticket.usuario }}</p>
+                            <p>Tipo: {{ ticket.tipo_problema }}</p>
+                            <p>Producto: {{ ticket.producto }}</p>
+                            <p>Estado: {{ ticket.estado }}</p>
+                        </div>
+                    
+                    
+                    </section>
+                    {% endfor %}
+
+                </div>
+<!--               <div class="tareas"> -->
+ <!--               <h2>Tareas</h2> -->
+ <!--              Aquí puedes usar un bucle para mostrar las tareas desde la base de datos -->
+ <!--                </div> -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal para crear tickets -->
+    <div id="modales" class="modal">
+        <div class="modal-content">
+            <header class="modalhead">
+            <span class="cerrar">&times;</span>
+            <h2 class = "titulomodal">Crear Ticket</h2>
+            </header>
+            <form id="ticketForm" method="post" action="/tickets">
+                <label for="ticketTitulo">Título:</label>
+                <input type="text" id="ticketTitulo" name="titulo" required>
+                <label for="ticketEmpresa">Empresa:</label>
+                <input type="text" id="ticketEmpresa" name="nombre_empresa" required>
+                <label for="ticketUsuario">Usuario:</label>
+                <input type="text" id="ticketUsuario" name="usuario" required>
+                <label for="ticketProducto">Producto:</label>
+                <select id="ticketProducto" name="producto">
+                    <option value="Reloj">Reloj</option>
+                    <option value="App">Aplicacion</option>
+                    <option value="Web">Plataforma Web</option>
+                    <option value="Otro">Otros</option>             
+                </select>
+                <label for="ticketProblema">¿Que reporta el usuario?</label>
+                <select id="ticketProblema" name="problema">
+                    <option value="Problema tecnico">Problema tecnico</option>
+                    <option value="Consulta">Consulta</option>
+                    <option value="Bug">Bug</option>
+                    <option value="Peticion">Peticion</option>
+                </select>
+                <label for="prioridad">Prioridad</label>
+                <input type="text" id="prioridad" name="prioridad" required>
+                <label for="ticketDescription">Descripción:</label>
+                <textarea id="ticketDescription" name="descripcion" rows="4" required></textarea>
+                <input type="submit" value="Crear ticket">
+            </form>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
