@@ -1,5 +1,6 @@
 from flask import render_template, redirect, url_for, request, flash, current_app
 from app.modelo import *
+
 @current_app.route('/')
 def index():
     return redirect(url_for('tickets'))

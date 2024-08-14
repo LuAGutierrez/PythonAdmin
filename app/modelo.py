@@ -63,8 +63,24 @@ def insertar_datos_ticket(mysql, nombre, empresa, prioridad , descripcion, produ
 # Cambio el estado de un ticket
 def cambiar_estado_ticket(mysql,id_ticket):
     with mysql.cursor(dictionary=True) as cursor:
+        # Paso 1: Obtener el estado actual del ticket
+        consulta = "SELECT estado FROM tickets WHERE id_ticket = %s"
+        params = (id_ticket)
+        
+        cursor.execute(consulta, params)
+        resultado = cursor.fetchone()
+        
+        if not resultado:
+            return False  # El ticket no existe
+        
+        estado_actual = resultado['estado']
+
+    # Paso 2: Determinar el nuevo estado
+    nuevo_estado = 'Pendiente' if estado_actual == 'Resuelto' else 'Resuelto'
+
+    with mysql.cursor(dictionary=True) as cursor:
         consulta = """UPDATE tickets SET estado = %s where id_ticket = %s"""
-        params = ('Resuelto',id_ticket)
+        params = (nuevo_estado,id_ticket)
 
         cursor.execute(consulta,params)
         mysql.commit()
