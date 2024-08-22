@@ -43,7 +43,12 @@
                         <div class="top-description">
                             <h2>{{ ticket.titulo }}</h2>
                             <form method="post" action="{{ url_for('cambiar_estado', id_ticket=ticket.id_ticket) }}">
-                                <button type="submit">Resuelto</button>
+                                {% if ticket.estado == 'Resuelto' %}
+                                    <button type="submit">Pendiente</button>
+                                {% else %}
+                                    <button type="submit">Resuelto</button>
+                                {% endif %}
+
                             </form>
                         </div>
                         <div class="m-description">

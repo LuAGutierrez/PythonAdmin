@@ -65,7 +65,7 @@ def cambiar_estado_ticket(mysql,id_ticket):
     with mysql.cursor(dictionary=True) as cursor:
         # Paso 1: Obtener el estado actual del ticket
         consulta = "SELECT estado FROM tickets WHERE id_ticket = %s"
-        params = (id_ticket)
+        params = (id_ticket,)
         
         cursor.execute(consulta, params)
         resultado = cursor.fetchone()
@@ -108,7 +108,3 @@ def insertar_datos_tarea(mysql,titulo,descripcion,responsable,afectado):
 
         # Revertir cualquier cambio en caso de error
         mysql.rollback()  
-
-
-
-
