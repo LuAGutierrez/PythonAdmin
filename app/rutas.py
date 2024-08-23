@@ -52,3 +52,10 @@ def cambiar_estado(id_ticket):
     cambiar_estado_ticket(current_app.mysql,id_ticket) 
 
     return redirect(url_for('tickets'))
+
+@current_app.route('/tareas/<int:id_tarea>', methods=['POST'])
+def cambiar_estado_tarea(id_tarea):
+    
+    cambiar_estado_tareas(current_app.mysql,id_tarea)
+
+    return redirect(url_for('tareas'))

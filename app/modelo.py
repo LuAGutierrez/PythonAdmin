@@ -79,7 +79,7 @@ def cambiar_estado_ticket(mysql,id_ticket):
     nuevo_estado = 'Pendiente' if estado_actual == 'Resuelto' else 'Resuelto'
 
     with mysql.cursor(dictionary=True) as cursor:
-        consulta = """UPDATE tickets SET estado = %s where id_ticket = %s"""
+        consulta = """UPDATE tickets SET estado = %s where ticket = %s"""
         params = (nuevo_estado,id_ticket)
 
         cursor.execute(consulta,params)
@@ -87,6 +87,32 @@ def cambiar_estado_ticket(mysql,id_ticket):
 
         return cursor.rowcount > 0  # Devuelve True si se actualizó al menos una fila
 
+# Cambio estado tareas
+def cambiar_estado_tareas(mysql,id_tarea):
+    with mysql.cursor(dictionary=True) as cursor:
+        # Paso 1: Obtener el estado actual del ticket
+        consulta = "SELECT estado FROM tareas WHERE id_tarea = %s"
+        params = (id_tarea,)
+        
+        cursor.execute(consulta, params)
+        resultado = cursor.fetchone()
+        
+        if not resultado:
+            return False  # La tarea no existe
+        
+        estado_actual = resultado['estado']
+
+    # Paso 2: Determinar el nuevo estado
+    nuevo_estado = 'Pendiente' if estado_actual == 'Resuelto' else 'Resuelto'
+
+    with mysql.cursor(dictionary=True) as cursor:
+        consulta = """UPDATE tareas SET estado = %s where id_tarea = %s"""
+        params = (nuevo_estado,id_tarea,)
+
+        cursor.execute(consulta,params)
+        mysql.commit()
+
+        return cursor.rowcount > 0  # Devuelve True si se actualizó al menos una fila
 
 
 # Inserto los datos de la tarea en la base de datos

@@ -32,15 +32,26 @@
                     <h2 class="h2-top">Tareas</h2>
                     {% for tarea in tareas %}
                     <section class="descripcion">
-                        <header></header>
-                        <h1>{{ tarea.titulo }}</h>
-                        </header>
-                    <section>
-                        <a href="http://"> >>Descripción: {{ tarea.descripcion }}</a> 
-                    </section>
-                    <footer>
-                        <p>Responsable: {{ tarea.responsable }}</p><p>Afectado: {{ tarea.afectado }} </p><p>Estado: {{ tarea.estado }}</p>
-                    </footer>
+
+                        <div class="top-description">
+                            <h2>{{ tarea.titulo }}</h2>
+                            <form method="post" action="{{ url_for('cambiar_estado_tarea', id_tarea=tarea.id_tarea) }}">
+                                {% if tarea.estado == 'Resuelto' %}
+                                    <button type="submit">Pendiente</button>
+                                {% else %}
+                                    <button type="submit">Resuelto</button>
+                                {% endif %}
+
+                            </form>
+                        </div>
+                        <div class="m-description">
+                            <a>{{ tarea.descripcion }}</a>
+                        </div>
+                        <div class="l-description">
+                            <p>Responsable: {{ tarea.responsable }}</p>
+                            <p>Afectado: {{ tarea.afectado }} </p>
+                            <p>Estado: {{ tarea.estado }}</p>
+                        </div>
                     </section>
                     
                     {% endfor %}
