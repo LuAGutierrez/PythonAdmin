@@ -13,6 +13,7 @@ def obtener_tickets(mysql, estado=None):
 
             cursor.execute(consulta, params)    
             tickets = cursor.fetchall()
+            
     except mysql.connector.Error as e:
         # Si hay algun error imprime cartel en consola, esto puede ser utilizado en el html
         print(f"Error al obtener datos: {e}")
@@ -27,7 +28,11 @@ def obtener_tareas(mysql,estado=None):
             consulta = """SELECT * FROM tareas"""
             params = ()
 
-            cursor.execute(consulta)
+            if estado:
+                consulta += " WHERE estado = %s"
+                params= (estado,)
+
+            cursor.execute(consulta,params)
             tareas = cursor.fetchall()
 
     except mysql.connector.Error as e:
@@ -88,6 +93,7 @@ def cambiar_estado_ticket(mysql,id_ticket):
         return cursor.rowcount > 0  # Devuelve True si se actualizó al menos una fila
 
 # Cambio estado tareas
+
 def cambiar_estado_tareas(mysql,id_tarea):
     with mysql.cursor(dictionary=True) as cursor:
         # Paso 1: Obtener el estado actual del ticket

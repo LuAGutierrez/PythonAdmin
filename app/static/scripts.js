@@ -1,5 +1,6 @@
 // Boton para ir a tareas //
 $(document).ready(function() {
+    var currentPath = window.location.pathname; // Obtiene el camino actual de la URL
     // jQuery
     $('#tareas').on('click', function() {
         window.location.href = '/tareas';
@@ -10,8 +11,12 @@ $(document).ready(function() {
     });
 
     $('#filtro').on('change', function() {
-        var selectedValue = $(this).val(); // Obtiene el valor seleccionado del elemento 'filtro'.
-        window.location.href = `/tickets?estado=${selectedValue}`; // Redirige con el filtro aplicado como parámetro.
+        var selectedValue = $(this).val(); // Obtiene el valor seleccionado del filtro
+        if (currentPath === '/tickets') {
+            window.location.href = `/tickets?estado=${selectedValue}`; // Redirige con el filtro para tickets
+        } else if (currentPath === '/tareas') {
+            window.location.href = `/tareas?estado=${selectedValue}`; // Redirige con el filtro para tareas
+        }
     });
 
 
